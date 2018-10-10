@@ -1,5 +1,6 @@
 <?php
-
+use App\Model\User;
+use App\Model\Location;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,28 +15,20 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
 Route::get('/insert',function(){
-    DB::table('users')->insert(
-        ['email'=>'aaa1233@gamil.com','password'=>'1111']
+    DB::table('location_photo')->insert(
+        ['location_id'=>'2','photo_id'=>'3']
     );
 });
 
 Route::get('/read',function(){
-    $query = DB::table('users')
-                    ->where('id',1)
-                    ->get();
-    print_r($query);
+    $user = User::all();
+    foreach($user as $user){
+        return $user->email;
+    }
 });
 
-Route::get('/update',function(){
-    DB::table('users')
-            ->where('id', 1)
-            ->update(['password' => '1112222']);
-});
-
-Route::get('/delete',function(){
-    DB::table('users')
-            ->where('id',3)
-            ->delete();
+Route::get('/find',function(){
+    $location = Location::find(1)->photo()->get();
+    return $location;
 });
