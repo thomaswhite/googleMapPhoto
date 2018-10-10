@@ -11,4 +11,11 @@ class MarkController extends Controller
         $coordinate = $request->all();
         return Location::create($coordinate);
     }
+    public function deleteMark(Request $request){
+        $id = $request->id;
+        $mark = Location::find($id);
+        if($mark){
+            $mark->delete();
+        }
+    }
 }
