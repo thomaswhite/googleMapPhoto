@@ -15,20 +15,4 @@ use App\Model\Location;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/insert',function(){
-    DB::table('location_photo')->insert(
-        ['location_id'=>'2','photo_id'=>'3']
-    );
-});
 
-Route::get('/read',function(){
-    $user = User::all();
-    foreach($user as $user){
-        return $user->email;
-    }
-});
-
-Route::get('/find',function(){
-    $location = Location::find(1)->photo()->get();
-    return $location;
-});
