@@ -18,6 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::group(['prifex'=>'api'],function(){
-    Route::post('/add/mark','MarkController@addMark');
-    Route::post('/delete/mark','MarkController@deleteMark');
+    Route::post('/add/mark', 'MarkController@addMark');
+    Route::post('/delete/mark', 'MarkController@deleteMark');
+    Route::post('/update/mark', 'MarkController@updateMark');
 });
