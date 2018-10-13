@@ -13,6 +13,6 @@ use App\Model\Location;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('googlemap');
 });
 
