@@ -11,7 +11,7 @@ class Location extends Model
         'lat','lng'
     ];
 
-    public function photo(){
+    public function photos(){
         return $this->belongsToMany('App\Model\Photo');
     }
 }

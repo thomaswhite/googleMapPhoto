@@ -23,6 +23,7 @@ Route::group(['prifex'=>'api'],function(){
     Route::post('/mark/delete', 'MarkController@deleteMark');
     Route::post('/mark/update', 'MarkController@updateMark');
 
+    Route::post('/photo/list', 'PhotoController@listPhoto');
     Route::post('/photo/upload', 'PhotoController@uploadPhoto');
     Route::post('/photo/delete', 'PhotoController@deletePhoto');
 });

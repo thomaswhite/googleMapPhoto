@@ -19,6 +19,16 @@ class PhotoController extends Controller
         return response()->json($data);
     }
 
+    public function listPhoto(Request $request){
+        $mark = Location::find($request->id);
+
+        foreach($mark->photos as $key=>$photo){
+            $data[$key]['id'] = $photo->id;
+            $data[$key]['path'] = $photo->path;
+        }
+        return response()->json($data);
+    }
+
     public function uploadPhoto(Request $request){
         $location_id = $request->id;
         $mark = Location::find($location_id);
@@ -36,7 +46,7 @@ class PhotoController extends Controller
 
             // insert data in db
             $photo_id = Photo::create(['path' => $photo_url]);
-            $mark->photo()->save($photo_id);
+            $mark->photos()->save($photo_id);
 
             return $this->responseData(true,'');
         }
@@ -59,7 +69,7 @@ class PhotoController extends Controller
             // delete s3 file
             Storage::disk('s3')->delete('photo/'.end($photo_name));
             $photo->delete();
-            $mark->photo()->detach($photo_id);
+            $mark->photos()->detach($photo_id);
             return $this->responseData(true,'');
         }
         
