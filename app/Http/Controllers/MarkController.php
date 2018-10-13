@@ -7,6 +7,16 @@ use App\Model\Location;
 
 class MarkController extends Controller
 {
+    public function listMark(Request $request){
+        $mark = Location::all();
+        foreach($mark as $key=>$value){
+            $data[$key]['id'] = $key;
+            $data[$key]['lat'] = $value->lat;
+            $data[$key]['lng'] = $value->lng;
+        }
+        return response()->json($data);
+    }
+
     public function addMark(Request $request){
         $coordinate = $request->all();
         return Location::create($coordinate);
