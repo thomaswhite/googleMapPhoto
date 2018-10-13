@@ -19,7 +19,16 @@ class MarkController extends Controller
 
     public function addMark(Request $request){
         $coordinate = $request->all();
-        return Location::create($coordinate);
+
+        $location_data = Location::create($coordinate);
+        if($location_data){
+            $data['success'] = true;
+            $data['id'] = $location_data->id;
+            return response()->json($data);
+        }
+        
+        $data['success'] = false;
+        return response()->json($data);
     }
 
     public function deleteMark(Request $request){
