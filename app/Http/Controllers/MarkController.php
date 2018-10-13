@@ -10,7 +10,7 @@ class MarkController extends Controller
     public function listMark(Request $request){
         $mark = Location::all();
         foreach($mark as $key=>$value){
-            $data[$key]['id'] = $key;
+            $data[$key]['id'] = $value->id;
             $data[$key]['lat'] = $value->lat;
             $data[$key]['lng'] = $value->lng;
         }
