@@ -37,7 +37,13 @@ class MarkController extends Controller
 
         if($mark){
             $mark->delete();
+            
+            $data['success'] = true;
+            return response()->json($data);
         }
+        
+        $data['success'] = false;
+        return response()->json($data);
     }
 
     public function updateMark(Request $request){
