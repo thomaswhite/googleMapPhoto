@@ -5,7 +5,7 @@
                 Upload
                 <input type="file" v-on:change="previewImage"/>
             </label>
-            <div class = "control">Delete</div>
+            <div class = "control" v-on:click = "deletePhoto">Delete</div>
         </div>
         <div class = "carousel-area">
             <!-- Loading spinner -->
@@ -33,6 +33,22 @@
             uploadClick : function(){
                 this.$store.commit('isUpload',true);
             },
+            deletePhoto : function(){
+                this.$store.commit('isReading',true);
+
+                let data = {
+                    location_id : this.markerId,
+                    photo_id : this.photos[this.photoIndex].id
+                }
+                axios.post('/api/photo/delete',data).then((res)=>{
+                    if(res.data.success){
+                        this.$store.commit('deletePhoto',this.photoIndex);
+                        setTimeout(()=>{
+                            this.$store.commit('isReading',false)
+                        },1000);
+                    }
+                }).catch((err)=>{ console.log(err) })
+            },
             previewImage : function(event){
                 let payload = {};
 
@@ -45,7 +61,6 @@
                 }
             },
             closeBackdrop : function(event){
-                console.log(event.target);
                 if(event.target.id == "backdrop"){
                     this.$store.commit('backdropClose');
                 }
@@ -57,6 +72,15 @@
             },
             isReading : function(){
                 return this.$store.state.isReading;
+            },
+            photos : function(){
+                return this.$store.state.photos;
+            },
+            photoIndex : function(){
+                return this.$store.state.photo_index;
+            },
+            markerId : function(){
+                return this.$store.state.marker_id;
             }
         }
     }

@@ -32,6 +32,7 @@ export const marker = {
             let data = {
                 id : marker.id
             }
+            
             axios.post('/api/photo/list',data).then((res)=>{
                 if(res.data.success != false){
                     this.$store.commit('setPhotos',res.data);

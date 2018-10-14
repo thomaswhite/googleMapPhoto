@@ -27,6 +27,7 @@
 
                 <!-- photo from db -->
                 <div class = "item" ref = "item"
+                     v-if = "!isReading"
                      v-for = "item in photos" >
                     <div class = "photo">
                         <img v-bind:src="item.path">
@@ -48,11 +49,12 @@
             return {
                 slider_width :0,
                 item_width:0,
-                sending : false
+                sending : false,
+                photoIndex : 0,
             }
         },
         created(){
-            
+            this.photoIndex = this.$store.state.photo_index;
         },
         mounted(){
             this.slider_width = this.$refs.slider.clientWidth;
@@ -64,14 +66,23 @@
             clickLeft : function(){
                 let nextPosition = this.position + this.item_width;
                 if(nextPosition <= 0){
-                    this.$store.commit('setPosition',nextPosition);
+                    this.photoIndex--;
+                    this.updatePosition(nextPosition);
                 }
             },
             clickRight : function(){
                 let nextPosition = this.position - this.item_width
                 if(nextPosition > -(this.slider_width)){
-                    this.$store.commit('setPosition',nextPosition);
+                    this.photoIndex++;
+                    this.updatePosition(nextPosition);
                 }
+            },
+            updatePosition : function(position){
+                let payload = {
+                    index : this.photoIndex,
+                    position : position
+                }
+                this.$store.commit('setPosition',payload);
             },
             cancel : function(){
                 if(this.photos.length != 0){
@@ -96,6 +107,9 @@
             },
             isReading : function(){
                 return this.$store.state.isReading;
+            },
+            markerId : function(){
+                return this.$store.state.marker_id;
             }
         }
     }
