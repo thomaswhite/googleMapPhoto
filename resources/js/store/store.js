@@ -9,7 +9,9 @@ export const store = new Vuex.Store({
     marker_id : 0,
     position : 0,
     isUpload : false,
+    isReading : true,
     uploadPhoto : { src : "" , value : "" },
+    backdrop : false
   },
   mutations: {
     setMarkerId(state,id){
@@ -18,11 +20,22 @@ export const store = new Vuex.Store({
     setPosition(state,position){
       state.position = position;
     },
+    setPhotos(state,data){
+      state.photos = data;
+      state.isReading = false;
+    },
+    backdropShow(state){
+      state.backdrop = true;
+    },
+    backdropClose(state){
+      state.backdrop = false;
+      state.photos = [];
+      state.position = 0;
+    },
     isUpload(state,isUpload){
-      if(isUpload){
-        state.position = 0;
-      }
-      state.isUpload = isUpload
+      state.isUpload = isUpload;
+      state.position = 0;
+      state.isReading = false;
     },
     previewImage(state,payload){
       state.uploadPhoto.value = payload.value;

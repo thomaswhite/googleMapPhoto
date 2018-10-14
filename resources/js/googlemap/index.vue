@@ -20,7 +20,7 @@
             return {
                 markers : [],
                 map : {},
-                isShow : true
+                // isShow : true
             }
         },
         mounted(){
@@ -36,6 +36,11 @@
         },
         methods: {
         },
+        computed : {
+            isShow : function(){
+                return this.$store.state.backdrop;
+            }
+        }
     }
 </script>
 

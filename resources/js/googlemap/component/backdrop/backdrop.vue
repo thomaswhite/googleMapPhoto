@@ -1,5 +1,5 @@
 <template>
-    <div class = "backdrop">
+    <div class = "backdrop" id = "backdrop" v-on:click = "closeBackdrop">
         <div class = "control-area">
             <label class = "control" v-on:click = "uploadClick">
                 Upload
@@ -8,7 +8,10 @@
             <div class = "control">Delete</div>
         </div>
         <div class = "carousel-area">
-            <Carousel/>
+            <!-- Loading spinner -->
+            <i class="fa fa-spinner fa-spin" v-if = "isReading"></i>
+            
+            <Carousel v-if = "!isReading"/>
         </div>
     </div>
 </template>
@@ -40,14 +43,20 @@
                     payload.value = event.target.files[0];
                     this.$store.commit('previewImage',payload);
                 }
+            },
+            closeBackdrop : function(event){
+                console.log(event.target);
+                if(event.target.id == "backdrop"){
+                    this.$store.commit('backdropClose');
+                }
             }
         },
         computed : {
-            markerId : function(){
-                return this.$store.state.marker_id;
-            },
             isUpload : function(){
                 return this.$store.state.isUpload;
+            },
+            isReading : function(){
+                return this.$store.state.isReading;
             }
         }
     }

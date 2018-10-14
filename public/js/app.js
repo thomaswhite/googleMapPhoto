@@ -25673,8 +25673,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             markers: [],
-            map: {},
-            isShow: true
+            map: {}
+            // isShow : true
         };
     },
     mounted: function mounted() {
@@ -25693,7 +25693,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         });
     },
 
-    methods: {}
+    methods: {},
+    computed: {
+        isShow: function isShow() {
+            return this.$store.state.backdrop;
+        }
+    }
 });
 
 /***/ }),
@@ -25759,7 +25764,22 @@ var marker = {
             });
         },
         markerClick: function markerClick(marker) {
+            var _this2 = this;
+
+            this.$store.commit('backdropShow');
             this.$store.commit('setMarkerId', marker.id);
+            var data = {
+                id: marker.id
+            };
+            axios.post('/api/photo/list', data).then(function (res) {
+                if (res.data.success != false) {
+                    _this2.$store.commit('setPhotos', res.data);
+                } else {
+                    _this2.$store.commit('isUpload', true);
+                }
+            }).catch(function (err) {
+                console.log(err);
+            });
         },
         deleteMarker: function deleteMarker(marker) {
             var data = {
@@ -25852,6 +25872,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 
@@ -25880,14 +25903,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 payload.value = event.target.files[0];
                 _this.$store.commit('previewImage', payload);
             };
+        },
+        closeBackdrop: function closeBackdrop(event) {
+            console.log(event.target);
+            if (event.target.id == "backdrop") {
+                this.$store.commit('backdropClose');
+            }
         }
     },
     computed: {
-        markerId: function markerId() {
-            return this.$store.state.marker_id;
-        },
         isUpload: function isUpload() {
             return this.$store.state.isUpload;
+        },
+        isReading: function isReading() {
+            return this.$store.state.isReading;
         }
     }
 });
@@ -25951,6 +25980,12 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixin_photo__ = __webpack_require__(75);
+//
+//
+//
+//
+//
 //
 //
 //
@@ -25991,16 +26026,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    mixins: [__WEBPACK_IMPORTED_MODULE_0__mixin_photo__["a" /* photo */]],
     data: function data() {
         return {
             slider_width: 0,
             item_width: 0,
-            item: ['a', 'b', 'c', 'd']
+            sending: false
         };
     },
+    created: function created() {},
     mounted: function mounted() {
         this.slider_width = this.$refs.slider.clientWidth;
-        this.item_width = this.$refs.item[0].clientWidth + 40;
+        if (this.$refs.item) {
+            this.item_width = this.$refs.item[0].clientWidth + 40;
+        }
     },
 
     methods: {
@@ -26017,7 +26056,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         },
         cancel: function cancel() {
-            this.$store.commit('cancelUpload');
+            if (this.photos.length != 0) {
+                this.$store.commit('cancelUpload');
+            } else {
+                this.$store.commit('backdropClose');
+            }
         }
     },
     computed: {
@@ -26032,6 +26075,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         isUpload: function isUpload() {
             return this.$store.state.isUpload;
+        },
+        isReading: function isReading() {
+            return this.$store.state.isReading;
         }
     }
 });
@@ -48110,7 +48156,9 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
     marker_id: 0,
     position: 0,
     isUpload: false,
-    uploadPhoto: { src: "", value: "" }
+    isReading: true,
+    uploadPhoto: { src: "", value: "" },
+    backdrop: false
   },
   mutations: {
     setMarkerId: function setMarkerId(state, id) {
@@ -48119,11 +48167,22 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
     setPosition: function setPosition(state, position) {
       state.position = position;
     },
+    setPhotos: function setPhotos(state, data) {
+      state.photos = data;
+      state.isReading = false;
+    },
+    backdropShow: function backdropShow(state) {
+      state.backdrop = true;
+    },
+    backdropClose: function backdropClose(state) {
+      state.backdrop = false;
+      state.photos = [];
+      state.position = 0;
+    },
     isUpload: function isUpload(state, _isUpload) {
-      if (_isUpload) {
-        state.position = 0;
-      }
       state.isUpload = _isUpload;
+      state.position = 0;
+      state.isReading = false;
     },
     previewImage: function previewImage(state, payload) {
       state.uploadPhoto.value = payload.value;
@@ -49116,7 +49175,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.backdrop[data-v-421241c3] {\n  width: 100%;\n  height: 100%;\n  position: fixed;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  background-color: rgba(175, 174, 174, 0.3);\n  z-index: 100;\n}\n.carousel-area[data-v-421241c3] {\n  width: 60%;\n  height: 70%;\n}\n.control-area[data-v-421241c3] {\n  width: 100%;\n  height: 10%;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: end;\n      -ms-flex-align: end;\n          align-items: flex-end;\n}\n.control[data-v-421241c3] {\n  margin: 0 1rem;\n  padding: 0.4rem 1rem;\n  border-radius: 5px;\n  background-color: #7b97e4;\n  cursor: pointer;\n}\n.control[data-v-421241c3]:hover {\n  color: #fffefe;\n}\ninput[data-v-421241c3] {\n  display: none;\n}\n", ""]);
+exports.push([module.i, "\n.backdrop[data-v-421241c3] {\n  width: 100%;\n  height: 100%;\n  position: fixed;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  background-color: rgba(175, 174, 174, 0.3);\n  z-index: 100;\n}\n.carousel-area[data-v-421241c3] {\n  width: 385px;\n  height: 70%;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.control-area[data-v-421241c3] {\n  width: 100%;\n  height: 10%;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: end;\n      -ms-flex-align: end;\n          align-items: flex-end;\n}\n.control[data-v-421241c3] {\n  margin: 0 1rem;\n  padding: 0.4rem 1rem;\n  border-radius: 5px;\n  background-color: #7b97e4;\n  cursor: pointer;\n}\n.control[data-v-421241c3]:hover {\n  color: #fffefe;\n}\ninput[data-v-421241c3] {\n  display: none;\n}\n", ""]);
 
 // exports
 
@@ -49129,21 +49188,44 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "backdrop" }, [
-    _c("div", { staticClass: "control-area" }, [
-      _c("label", { staticClass: "control", on: { click: _vm.uploadClick } }, [
-        _vm._v("\n            Upload\n            "),
-        _c("input", {
-          attrs: { type: "file" },
-          on: { change: _vm.previewImage }
-        })
+  return _c(
+    "div",
+    {
+      staticClass: "backdrop",
+      attrs: { id: "backdrop" },
+      on: { click: _vm.closeBackdrop }
+    },
+    [
+      _c("div", { staticClass: "control-area" }, [
+        _c(
+          "label",
+          { staticClass: "control", on: { click: _vm.uploadClick } },
+          [
+            _vm._v("\n            Upload\n            "),
+            _c("input", {
+              attrs: { type: "file" },
+              on: { change: _vm.previewImage }
+            })
+          ]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "control" }, [_vm._v("Delete")])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "control" }, [_vm._v("Delete")])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "carousel-area" }, [_c("Carousel")], 1)
-  ])
+      _c(
+        "div",
+        { staticClass: "carousel-area" },
+        [
+          _vm.isReading
+            ? _c("i", { staticClass: "fa fa-spinner fa-spin" })
+            : _vm._e(),
+          _vm._v(" "),
+          !_vm.isReading ? _c("Carousel") : _vm._e()
+        ],
+        1
+      )
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -49190,7 +49272,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.carousel[data-v-53612d03] {\n  width: 100%;\n  height: 100%;\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.carousel-block[data-v-53612d03] {\n  width: 310px;\n  height: 480px;\n  margin: 0 1rem;\n  overflow: hidden;\n}\n.carousel-slider[data-v-53612d03] {\n  height: 100%;\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  overflow: hidden;\n  -webkit-transition: -webkit-transform 1s ease;\n  transition: -webkit-transform 1s ease;\n  transition: transform 1s ease;\n  transition: transform 1s ease, -webkit-transform 1s ease;\n}\n.item[data-v-53612d03] {\n  width: 270px;\n  height: 430px;\n  margin: 0 20px;\n  padding-top: 30px;\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  border-radius: 5px;\n  background-color: #ffffff;\n}\n.photo[data-v-53612d03] {\n  width: 230px;\n  height: 310px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  background-color: #b6b2b2;\n  border-radius: 2px;\n}\n.photo img[data-v-53612d03] {\n    max-width: 230px;\n}\n.discription[data-v-53612d03] {\n  max-width: 230px;\n  margin-top: 20px;\n}\n.select[data-v-53612d03] {\n  width: 230px;\n  margin-top: 20px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.yes[data-v-53612d03],\n.no[data-v-53612d03] {\n  width: 50px;\n  height: 50px;\n  margin: 0 1rem;\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  font-size: 32px;\n  border-radius: 50%;\n  color: #fdfdfd;\n  cursor: pointer;\n}\n.yes[data-v-53612d03]:hover,\n  .no[data-v-53612d03]:hover {\n    opacity: 0.8;\n}\n.yes[data-v-53612d03] {\n  background-color: #56c456;\n}\n.no[data-v-53612d03] {\n  background-color: #e75b5b;\n}\n.fa-angle-left[data-v-53612d03],\n.fa-angle-right[data-v-53612d03] {\n  font-size: 32px;\n}\n.fa-angle-left[data-v-53612d03]:hover,\n.fa-angle-right[data-v-53612d03]:hover {\n  opacity: 0.2;\n}\n", ""]);
+exports.push([module.i, "\n.carousel[data-v-53612d03] {\n  width: 100%;\n  height: 100%;\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.carousel-block[data-v-53612d03] {\n  width: 310px;\n  height: 480px;\n  margin: 0 1rem;\n  overflow: hidden;\n}\n.carousel-slider[data-v-53612d03] {\n  height: 100%;\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  overflow: hidden;\n  -webkit-transition: -webkit-transform 1s ease;\n  transition: -webkit-transform 1s ease;\n  transition: transform 1s ease;\n  transition: transform 1s ease, -webkit-transform 1s ease;\n}\n.item[data-v-53612d03] {\n  width: 270px;\n  height: 430px;\n  margin: 0 20px;\n  padding-top: 30px;\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  border-radius: 5px;\n  background-color: #ffffff;\n}\n.photo[data-v-53612d03] {\n  width: 230px;\n  height: 310px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  background-color: #b6b2b2;\n  border-radius: 2px;\n}\n.photo img[data-v-53612d03] {\n    max-width: 230px;\n}\n.discription[data-v-53612d03] {\n  max-width: 230px;\n  margin-top: 20px;\n}\n.select[data-v-53612d03] {\n  width: 230px;\n  margin-top: 20px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.yes[data-v-53612d03],\n.no[data-v-53612d03] {\n  width: 50px;\n  height: 50px;\n  margin: 0 1rem;\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  font-size: 32px;\n  border-radius: 50%;\n  color: #fdfdfd;\n  cursor: pointer;\n}\n.yes[data-v-53612d03]:hover,\n  .no[data-v-53612d03]:hover {\n    opacity: 0.8;\n}\n.yes[data-v-53612d03] {\n  background-color: #56c456;\n}\n.no[data-v-53612d03] {\n  background-color: #e75b5b;\n}\n.fa-spinner[data-v-53612d03] {\n  font-size: 32px;\n}\n.fa-angle-left[data-v-53612d03],\n.fa-angle-right[data-v-53612d03] {\n  font-size: 32px;\n}\n.fa-angle-left[data-v-53612d03]:hover,\n.fa-angle-right[data-v-53612d03]:hover {\n  opacity: 0.2;\n}\n", ""]);
 
 // exports
 
@@ -49222,7 +49304,19 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "select" }, [
-                  _vm._m(0),
+                  !_vm.sending
+                    ? _c(
+                        "div",
+                        { staticClass: "yes", on: { click: _vm.upload } },
+                        [_c("i", { staticClass: "fas fa-check" })]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.sending
+                    ? _c("div", { staticClass: "yes" }, [
+                        _c("i", { staticClass: "fa fa-spinner fa-spin" })
+                      ])
+                    : _vm._e(),
                   _vm._v(" "),
                   _c("div", { staticClass: "no", on: { click: _vm.cancel } }, [
                     _c("i", { staticClass: "fas fa-times" })
@@ -49231,24 +49325,16 @@ var render = function() {
               ])
             : _vm._e(),
           _vm._v(" "),
-          _vm._l(_vm.item, function(item) {
+          _vm._l(_vm.photos, function(item) {
             return _c(
               "div",
               { ref: "item", refInFor: true, staticClass: "item" },
               [
                 _c("div", { staticClass: "photo" }, [
-                  _vm._v(
-                    "\n                    " +
-                      _vm._s(item) +
-                      "\n                "
-                  )
+                  _c("img", { attrs: { src: item.path } })
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "discription" }, [
-                  _vm._v(
-                    '\n                        Both mean "when", so I was wondering what the difference is between them, and when each should be used.\n                '
-                  )
-                ])
+                _c("div", { staticClass: "discription" })
               ]
             )
           })
@@ -49263,16 +49349,7 @@ var render = function() {
     })
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "yes" }, [
-      _c("i", { staticClass: "fas fa-check" })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -49350,6 +49427,35 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-08e18d90", module.exports)
   }
 }
+
+/***/ }),
+/* 75 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return photo; });
+var photo = {
+    methods: {
+        upload: function upload() {
+            var _this = this;
+
+            if (this.uploadPhoto.value != '') {
+                this.sending = true;
+
+                var data = new FormData();
+                data.append('id', this.markerId);
+                data.append('photo', this.uploadPhoto.value);
+
+                axios.post('/api/photo/upload', data).then(function (res) {
+                    _this.sending = false;
+                    _this.$store.commit('isUpload', false);
+                }).catch(function (err) {
+                    console.log(err);
+                });
+            }
+        }
+    }
+};
 
 /***/ })
 /******/ ]);

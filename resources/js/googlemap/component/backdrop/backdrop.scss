@@ -9,8 +9,11 @@
     z-index: 100;
 }
 .carousel-area{
-    width:60%;
+    width:385px;
     height:70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .control-area{
     width:100%;

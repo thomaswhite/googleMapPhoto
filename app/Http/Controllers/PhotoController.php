@@ -21,12 +21,18 @@ class PhotoController extends Controller
 
     public function listPhoto(Request $request){
         $mark = Location::find($request->id);
-
-        foreach($mark->photos as $key=>$photo){
-            $data[$key]['id'] = $photo->id;
-            $data[$key]['path'] = $photo->path;
+        if($mark){
+            if(count($mark->photos) != 0){
+                foreach($mark->photos as $key=>$photo){
+                    $data[$key]['id'] = $photo->id;
+                    $data[$key]['path'] = $photo->path;
+                }
+                return response()->json($data);
+            }
+            return $this->responseData(false,'no photos');
         }
-        return response()->json($data);
+        
+        return $this->responseData(false,'the mark not exist');
     }
 
     public function uploadPhoto(Request $request){
