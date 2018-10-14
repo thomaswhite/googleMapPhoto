@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Model\Location;
+use App\Model\Photo;
+use Storage;
 
 class MarkController extends Controller
 {
@@ -36,10 +38,23 @@ class MarkController extends Controller
         $mark = Location::find($id);
 
         if($mark){
-            $mark->delete();
-            
-            $data['success'] = true;
-            return response()->json($data);
+            if($mark->photos){
+                foreach($mark->photos as $photos){
+                    $photo = Photo::find($photos->id);
+                    if($photo){
+                        $photo_path = $photo->path;
+                        $photo_name = explode("/",$photo_path);
+
+                        // delete s3 file
+                        Storage::disk('s3')->delete('photo/'.end($photo_name));
+                        $photo->delete();
+                        $mark->photos()->detach($photos->id);
+                    }
+                }
+                $mark->delete();
+                $data['success'] = true;
+                return response()->json($data);
+            }
         }
         
         $data['success'] = false;
