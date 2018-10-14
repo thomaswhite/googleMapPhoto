@@ -10,7 +10,7 @@ export const marker = {
             this.markers.push(marker);
 
             // marker even listener
-            marker.addListener('click',this.markerClick.bind(marker,mark.id));
+            marker.addListener('click',this.markerClick.bind(marker,marker));
             marker.addListener('rightclick',this.deleteMarker.bind(marker,marker));
         },
         addMarkr : function(event){
@@ -26,8 +26,13 @@ export const marker = {
                 this.createMarker(mark);
             }).catch((err)=>{ console.log(err) });
         },
-        markerClick : function(id){
-            // console.log(id);
+        markerClick : function(marker){
+            let cont = "<div class = 'iw-container'>aaa</div>"
+            let infowindow = new google.maps.InfoWindow({
+                content: cont,
+            });
+            infowindow.open(map, marker);
+            console.log(infowindow);
         },
         deleteMarker : function(marker){
             let data = {

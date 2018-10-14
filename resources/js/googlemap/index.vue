@@ -1,18 +1,26 @@
 <template>
-    <div class="google-map" id = "map"></div>
+    <div class = "window">
+        <Backdrop v-if = "isShow"/>
+        <div class="google-map" id = "map"></div>
+    </div>
+    
 </template>
 
 <script>
     import {map} from './mixin/map.js';
     import {marker} from './mixin/marker.js';
+    import backdrop from './component/backdrop/backdrop.vue';
 
     export default {
         mixins : [map,marker],
+        components:{
+            'Backdrop':backdrop
+        },
         data () {
             return {
-                center :{},
-                markers:[],
-                map:{}
+                markers : [],
+                map : {},
+                isShow : true
             }
         },
         mounted(){
@@ -36,8 +44,18 @@
 </script>
 
 <style lang="scss">
+    .window{
+        width:100%;
+        height:100%;
+    }
     .google-map{
         width:100%;
         height:90%;
+    }
+    .iw-container{
+        width:100px;
+        height:100px;
+        color:red;
+        border-radius: 15px;
     }
 </style>
