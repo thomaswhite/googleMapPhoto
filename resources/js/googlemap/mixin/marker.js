@@ -27,12 +27,7 @@ export const marker = {
             }).catch((err)=>{ console.log(err) });
         },
         markerClick : function(marker){
-            let cont = "<div class = 'iw-container'>aaa</div>"
-            let infowindow = new google.maps.InfoWindow({
-                content: cont,
-            });
-            infowindow.open(map, marker);
-            console.log(infowindow);
+            this.$store.commit('setMarkerId',marker.id);
         },
         deleteMarker : function(marker){
             let data = {

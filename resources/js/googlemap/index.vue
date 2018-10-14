@@ -35,15 +35,11 @@
             }).catch((err)=> { console.log(err) });
         },
         methods: {
-            // markerClick : function(e){
-            //     const position = new google.maps.LatLng(11,22);
-            //     const marker = new google.maps.Marker({position,map});
-            // },
         },
     }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
     .window{
         width:100%;
         height:100%;
@@ -51,11 +47,5 @@
     .google-map{
         width:100%;
         height:90%;
-    }
-    .iw-container{
-        width:100px;
-        height:100px;
-        color:red;
-        border-radius: 15px;
     }
 </style>

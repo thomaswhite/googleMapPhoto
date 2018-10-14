@@ -1,0 +1,34 @@
+.backdrop{
+    width:100%;
+    height:100%;
+    position:fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(175, 174, 174, 0.3);
+    z-index: 100;
+}
+.carousel-area{
+    width:60%;
+    height:70%;
+}
+.control-area{
+    width:100%;
+    height:10%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+.control{
+    margin:0 1rem;
+    padding: 0.4rem 1rem;
+    border-radius: 5px;
+    background-color: rgb(123, 151, 228);
+    cursor: pointer;
+}
+.control:hover{
+    color: rgb(255, 254, 254);
+}
+input{
+    display: none;
+}

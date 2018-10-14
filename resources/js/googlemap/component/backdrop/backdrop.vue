@@ -1,7 +1,11 @@
 <template>
     <div class = "backdrop">
         <div class = "control-area">
-            bbbb
+            <label class = "control" v-on:click = "uploadClick">
+                Upload
+                <input type="file" v-on:change="previewImage"/>
+            </label>
+            <div class = "control">Delete</div>
         </div>
         <div class = "carousel-area">
             <Carousel/>
@@ -22,31 +26,33 @@
         },
         mounted(){
         },
-        methods: {
+        methods : {
+            uploadClick : function(){
+                this.$store.commit('isUpload',true);
+            },
+            previewImage : function(event){
+                let payload = {};
+
+                let reader = new FileReader();
+                reader.readAsDataURL(event.target.files[0]);
+                reader.onload = () => {
+                    payload.src = reader.result;
+                    payload.value = event.target.files[0];
+                    this.$store.commit('previewImage',payload);
+                }
+            }
         },
+        computed : {
+            markerId : function(){
+                return this.$store.state.marker_id;
+            },
+            isUpload : function(){
+                return this.$store.state.isUpload;
+            }
+        }
     }
 </script>
 
-<style lang="scss">
-   .backdrop{
-       width:100%;
-       height:100%;
-       position:fixed;
-       display: flex;
-       flex-direction: column;
-       align-items: center;
-       background-color: rgba(175, 174, 174, 0.3);
-       /* opacity: 0.3; */
-       z-index: 100;
-   }
-   .carousel-area{
-       width:60%;
-       height:70%;
-       background-color: antiquewhite;
-   }
-   .control-area{
-       width:100%;
-       height:10%;
-       background-color: gold;
-   }
+<style lang="scss" scoped>
+   @import './backdrop.scss';
 </style>
