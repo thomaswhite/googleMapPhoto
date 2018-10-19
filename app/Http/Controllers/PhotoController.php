@@ -54,7 +54,11 @@ class PhotoController extends Controller
             $photo_id = Photo::create(['path' => $photo_url]);
             $mark->photos()->save($photo_id);
 
-            return $this->responseData(true,'');
+            $data['success'] = true;
+            $data['url'] = $photo_url;
+            $data['id'] = $photo_id->id;
+
+            return response()->json($data);
         }
 
         return $this->responseData(false,'no file');

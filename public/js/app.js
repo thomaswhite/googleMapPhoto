@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 15);
+/******/ 	return __webpack_require__(__webpack_require__.s = 16);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -70,7 +70,7 @@
 "use strict";
 
 
-var bind = __webpack_require__(10);
+var bind = __webpack_require__(11);
 var isBuffer = __webpack_require__(46);
 
 /*global toString:true*/
@@ -11364,10 +11364,70 @@ Vue.compile = compileToFunctions;
 
 module.exports = Vue;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(17).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(18).setImmediate))
 
 /***/ }),
 /* 3 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var state = {
+    slider_width: 0,
+    item_width: 0,
+    position: 0,
+    photo_index: 0
+};
+var mutations = {
+    sliderWidth: function sliderWidth(state, width) {
+        state.slider_width = width;
+    },
+    itemWidth: function itemWidth(state, width) {
+        state.item_width = width;
+    },
+    position: function position(state, _position) {
+        state.position = _position;
+    },
+    photo_index: function photo_index(state, index) {
+        state.photo_index = index;
+    },
+    clickRight: function clickRight(state) {
+        if (state.item_width != 0) {
+            var nextPosition = state.position - state.item_width;
+            if (nextPosition > -state.slider_width) {
+                state.photo_index++;
+                state.position = nextPosition;
+            }
+        }
+    },
+    clickLeft: function clickLeft(state) {
+        if (state.item_width != 0) {
+            var nextPosition = state.position + state.item_width;
+            if (nextPosition <= 0) {
+                state.photo_index--;
+                state.position = nextPosition;
+            }
+        }
+    }
+};
+var actions = {
+    backdropClose: function backdropClose(_ref) {
+        var commit = _ref.commit;
+
+        commit('sliderWidth', 0);
+        commit('itemWidth', 0);
+        commit('position', 0);
+        commit('photo_index', 0);
+    }
+};
+/* harmony default export */ __webpack_exports__["a"] = ({
+    namespaced: true,
+    state: state,
+    mutations: mutations,
+    actions: actions
+});
+
+/***/ }),
+/* 4 */
 /***/ (function(module, exports) {
 
 /*
@@ -11449,7 +11509,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -11468,7 +11528,7 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
-var listToStyles = __webpack_require__(24)
+var listToStyles = __webpack_require__(25)
 
 /*
 type StyleObject = {
@@ -11677,7 +11737,7 @@ function applyToTag (styleElement, obj) {
 
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports) {
 
 /* globals __VUE_SSR_CONTEXT__ */
@@ -11786,7 +11846,7 @@ module.exports = function normalizeComponent (
 
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11809,10 +11869,10 @@ function getDefaultAdapter() {
   var adapter;
   if (typeof XMLHttpRequest !== 'undefined') {
     // For browsers use XHR adapter
-    adapter = __webpack_require__(11);
+    adapter = __webpack_require__(12);
   } else if (typeof process !== 'undefined') {
     // For node use HTTP adapter
-    adapter = __webpack_require__(11);
+    adapter = __webpack_require__(12);
   }
   return adapter;
 }
@@ -11887,10 +11947,10 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = defaults;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -12080,7 +12140,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -14621,7 +14681,7 @@ Popper.Defaults = Defaults;
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(1)))
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -24992,7 +25052,7 @@ return jQuery;
 
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25010,7 +25070,7 @@ module.exports = function bind(fn, thisArg) {
 
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25021,7 +25081,7 @@ var settle = __webpack_require__(49);
 var buildURL = __webpack_require__(51);
 var parseHeaders = __webpack_require__(52);
 var isURLSameOrigin = __webpack_require__(53);
-var createError = __webpack_require__(12);
+var createError = __webpack_require__(13);
 var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(54);
 
 module.exports = function xhrAdapter(config) {
@@ -25197,7 +25257,7 @@ module.exports = function xhrAdapter(config) {
 
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25222,7 +25282,7 @@ module.exports = function createError(message, config, code, request, response) 
 
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25234,7 +25294,7 @@ module.exports = function isCancel(value) {
 
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25260,23 +25320,23 @@ module.exports = Cancel;
 
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(16);
+__webpack_require__(17);
 module.exports = __webpack_require__(63);
 
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__store_store__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__googlemap_index_vue__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__store_index__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__googlemap_index_vue__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__googlemap_index_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__googlemap_index_vue__);
 
 
@@ -25286,7 +25346,7 @@ __webpack_require__(40);
 window.Vue = __webpack_require__(2);
 
 new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
-    store: __WEBPACK_IMPORTED_MODULE_1__store_store__["a" /* store */],
+    store: __WEBPACK_IMPORTED_MODULE_1__store_index__["a" /* default */],
     el: '#app',
     render: function render(h) {
         return h(__WEBPACK_IMPORTED_MODULE_2__googlemap_index_vue___default.a);
@@ -25294,7 +25354,7 @@ new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 });
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {var scope = (typeof global !== "undefined" && global) ||
@@ -25350,7 +25410,7 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(18);
+__webpack_require__(19);
 // On some exotic environments, it's not clear which object `setimmediate` was
 // able to install onto.  Search each possibility in the same order as the
 // `setimmediate` library.
@@ -25364,7 +25424,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -25554,82 +25614,37 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(7)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(8)))
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return store; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_carousel__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_map__ = __webpack_require__(67);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modules_photo__ = __webpack_require__(68);
+
+
+
 
 
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */]);
 
-var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
-  state: {
-    photos: [],
-    photo_index: 0,
-    marker_id: 0,
-    position: 0,
-    isUpload: false,
-    isReading: true,
-    uploadPhoto: { src: "", value: "" },
-    backdrop: false
-  },
-  mutations: {
-    setMarkerId: function setMarkerId(state, id) {
-      state.marker_id = id;
-    },
-    setPosition: function setPosition(state, payload) {
-      state.position = payload.position;
-      state.photo_index = payload.index;
-    },
-    setPhotos: function setPhotos(state, data) {
-      state.photos = data;
-      state.isReading = false;
-      state.isUpload = false;
-      state.position = 0;
-      state.photo_index = 0;
-    },
-    backdropShow: function backdropShow(state) {
-      state.backdrop = true;
-      state.isReading = true;
-    },
-    backdropClose: function backdropClose(state) {
-      state.backdrop = false;
-      state.photos = [];
-      state.position = 0;
-    },
-    isUpload: function isUpload(state, _isUpload) {
-      state.isUpload = _isUpload;
-      state.position = 0;
-      state.isReading = false;
-    },
-    previewImage: function previewImage(state, payload) {
-      state.uploadPhoto.value = payload.value;
-      state.uploadPhoto.src = payload.src;
-    },
-    cancelUpload: function cancelUpload(state) {
-      state.isUpload = false;
-      state.uploadPhoto.src = "", state.uploadPhoto.value = "";
-    },
-    deletePhoto: function deletePhoto(state, index) {
-      state.photos.splice(index, 1);
-      state.position = 0;
-    },
-    isReading: function isReading(state, data) {
-      state.isReading = data;
-    }
+/* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
+  modules: {
+    carousel: __WEBPACK_IMPORTED_MODULE_2__modules_carousel__["a" /* default */],
+    map: __WEBPACK_IMPORTED_MODULE_3__modules_map__["a" /* default */],
+    photo: __WEBPACK_IMPORTED_MODULE_4__modules_photo__["a" /* default */]
   }
-});
+}));
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -26574,17 +26589,17 @@ var index_esm = {
 
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(22)
+  __webpack_require__(23)
 }
-var normalizeComponent = __webpack_require__(5)
+var normalizeComponent = __webpack_require__(6)
 /* script */
-var __vue_script__ = __webpack_require__(25)
+var __vue_script__ = __webpack_require__(26)
 /* template */
 var __vue_template__ = __webpack_require__(39)
 /* template functional */
@@ -26625,17 +26640,17 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(23);
+var content = __webpack_require__(24);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("b562e0ca", content, false, {});
+var update = __webpack_require__(5)("b562e0ca", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -26651,10 +26666,10 @@ if(false) {
 }
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(3)(false);
+exports = module.exports = __webpack_require__(4)(false);
 // imports
 
 
@@ -26665,7 +26680,7 @@ exports.push([module.i, "\n.window[data-v-08e18d90] {\n  width: 100%;\n  height:
 
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports) {
 
 /**
@@ -26698,15 +26713,14 @@ module.exports = function listToStyles (parentId, list) {
 
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixin_map_js__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__mixin_marker_js__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__component_backdrop_backdrop_vue__ = __webpack_require__(28);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__component_backdrop_backdrop_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__component_backdrop_backdrop_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixin_map_js__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__component_backdrop_backdrop_vue__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__component_backdrop_backdrop_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__component_backdrop_backdrop_vue__);
 //
 //
 //
@@ -26717,19 +26731,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 
-
+// import {marker} from './mixin/marker.js';
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    mixins: [__WEBPACK_IMPORTED_MODULE_0__mixin_map_js__["a" /* map */], __WEBPACK_IMPORTED_MODULE_1__mixin_marker_js__["a" /* marker */]],
+    // mixins : [map,marker],
+    mixins: [__WEBPACK_IMPORTED_MODULE_0__mixin_map_js__["a" /* map */]],
     components: {
-        'Backdrop': __WEBPACK_IMPORTED_MODULE_2__component_backdrop_backdrop_vue___default.a
+        'Backdrop': __WEBPACK_IMPORTED_MODULE_1__component_backdrop_backdrop_vue___default.a
     },
     data: function data() {
         return {
             markers: [],
             map: {}
-            // isShow : true
         };
     },
     mounted: function mounted() {
@@ -26748,45 +26762,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         });
     },
 
-    methods: {},
-    computed: {
-        isShow: function isShow() {
-            return this.$store.state.backdrop;
-        }
-    }
-});
-
-/***/ }),
-/* 26 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return map; });
-var map = {
-    methods: {
-        initMap: function initMap() {
-            var element = document.getElementById('map');
-            var options = {
-                zoom: 4,
-                center: new google.maps.LatLng(21.501527, -0.1921837),
-                disableDoubleClickZoom: true,
-                disableDefaultUI: true
-            };
-            this.map = new google.maps.Map(element, options);
-
-            // map even listener
-            this.map.addListener('dblclick', this.addMarkr);
-        }
-    }
-};
-
-/***/ }),
-/* 27 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return marker; });
-var marker = {
     methods: {
         createMarker: function createMarker(mark) {
             var position = new google.maps.LatLng(mark.lat, mark.lng);
@@ -26798,11 +26773,11 @@ var marker = {
             this.markers.push(marker);
 
             // marker even listener
-            marker.addListener('click', this.markerClick.bind(marker, marker));
+            marker.addListener('click', this.clickMarker.bind(marker, marker));
             marker.addListener('rightclick', this.deleteMarker.bind(marker, marker));
         },
         addMarkr: function addMarkr(event) {
-            var _this = this;
+            var _this2 = this;
 
             var mark = {
                 lat: event.latLng.lat(),
@@ -26813,25 +26788,28 @@ var marker = {
                 if (res.data.success) {
                     mark.id = res.data.id;
                 }
-                _this.createMarker(mark);
+                _this2.createMarker(mark);
             }).catch(function (err) {
                 console.log(err);
             });
         },
-        markerClick: function markerClick(marker) {
-            var _this2 = this;
+        clickMarker: function clickMarker(marker) {
+            var _this3 = this;
 
-            this.$store.commit('backdropShow');
-            this.$store.commit('setMarkerId', marker.id);
             var data = {
                 id: marker.id
             };
+            this.$store.dispatch('map/clickMarker', marker.id);
 
             axios.post('/api/photo/list', data).then(function (res) {
                 if (res.data.success != false) {
-                    _this2.$store.commit('setPhotos', res.data);
+                    _this3.$store.commit('photo/isUpload', false);
+                    _this3.$store.commit('photo/setPhotoList', res.data);
+                    _this3.$store.commit('map/spinner', false);
                 } else {
-                    _this2.$store.commit('isUpload', true);
+                    _this3.$store.commit('photo/setPhotoList', []);
+                    _this3.$store.commit('photo/isUpload', true);
+                    _this3.$store.commit('map/spinner', false);
                 }
             }).catch(function (err) {
                 console.log(err);
@@ -26849,6 +26827,35 @@ var marker = {
                 console.log(err);
             });
         }
+    },
+    computed: {
+        backdrop: function backdrop() {
+            return this.$store.state.map.backdrop;
+        }
+    }
+});
+
+/***/ }),
+/* 27 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return map; });
+var map = {
+    methods: {
+        initMap: function initMap() {
+            var element = document.getElementById('map');
+            var options = {
+                zoom: 3,
+                center: new google.maps.LatLng(21.501527, -0.1921837),
+                disableDoubleClickZoom: true,
+                disableDefaultUI: true
+            };
+            this.map = new google.maps.Map(element, options);
+
+            // map even listener
+            this.map.addListener('dblclick', this.addMarkr);
+        }
     }
 };
 
@@ -26861,7 +26868,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(29)
 }
-var normalizeComponent = __webpack_require__(5)
+var normalizeComponent = __webpack_require__(6)
 /* script */
 var __vue_script__ = __webpack_require__(31)
 /* template */
@@ -26914,7 +26921,7 @@ var content = __webpack_require__(30);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("4b6d5e0b", content, false, {});
+var update = __webpack_require__(5)("4b6d5e0b", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -26933,7 +26940,7 @@ if(false) {
 /* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(3)(false);
+exports = module.exports = __webpack_require__(4)(false);
 // imports
 
 
@@ -26983,12 +26990,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         uploadClick: function uploadClick() {
-            this.$store.commit('isUpload', true);
+            this.$store.commit('photo/isUpload', true);
         },
         deletePhoto: function deletePhoto() {
             var _this = this;
 
-            this.$store.commit('isReading', true);
+            // this.$store.commit('isReading',true);
 
             var data = {
                 location_id: this.markerId,
@@ -26998,7 +27005,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 if (res.data.success) {
                     _this.$store.commit('deletePhoto', _this.photoIndex);
                     setTimeout(function () {
-                        _this.$store.commit('isReading', false);
+                        // this.$store.commit('isReading',false)
                     }, 1000);
                 }
             }).catch(function (err) {
@@ -27015,31 +27022,36 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             reader.onload = function () {
                 payload.src = reader.result;
                 payload.value = event.target.files[0];
-                _this2.$store.commit('previewImage', payload);
+                _this2.$store.commit('photo/uploadPhoto', payload);
             };
         },
         closeBackdrop: function closeBackdrop(event) {
             if (event.target.id == "backdrop") {
-                this.$store.commit('backdropClose');
+                this.$store.commit('map/backdrop', false);
+                this.$store.commit('photo/setPhotoList', []);
+                this.$store.dispatch('carousel/backdropClose');
+
+                var payload = {
+                    src: "",
+                    value: ""
+                };
+                this.$store.commit('photo/uploadPhoto', payload);
             }
         }
     },
     computed: {
-        isUpload: function isUpload() {
-            return this.$store.state.isUpload;
+        spinner: function spinner() {
+            return this.$store.state.map.spinner;
         },
-        isReading: function isReading() {
-            return this.$store.state.isReading;
-        },
-        photos: function photos() {
-            return this.$store.state.photos;
-        },
-        photoIndex: function photoIndex() {
-            return this.$store.state.photo_index;
-        },
-        markerId: function markerId() {
-            return this.$store.state.marker_id;
+        photoList: function photoList() {
+            return this.$store.state.photo.photo_list;
         }
+        // photoIndex : function(){
+        //     return this.$store.state.photo_index;
+        // },
+        // markerId : function(){
+        //     return this.$store.state.marker_id;
+        // }
     }
 });
 
@@ -27052,7 +27064,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(33)
 }
-var normalizeComponent = __webpack_require__(5)
+var normalizeComponent = __webpack_require__(6)
 /* script */
 var __vue_script__ = __webpack_require__(35)
 /* template */
@@ -27105,7 +27117,7 @@ var content = __webpack_require__(34);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("21460b7f", content, false, {});
+var update = __webpack_require__(5)("21460b7f", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -27124,7 +27136,7 @@ if(false) {
 /* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(3)(false);
+exports = module.exports = __webpack_require__(4)(false);
 // imports
 
 
@@ -27190,8 +27202,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     mixins: [__WEBPACK_IMPORTED_MODULE_0__mixin_photo__["a" /* photo */]],
     data: function data() {
         return {
-            slider_width: 0,
-            item_width: 0,
             sending: false,
             photoIndex: 0
         };
@@ -27200,33 +27210,45 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.photoIndex = this.$store.state.photo_index;
     },
     mounted: function mounted() {
-        this.slider_width = this.$refs.slider.clientWidth;
+        this.$store.commit('carousel/sliderWidth', this.$refs.slider.clientWidth);
         if (this.$refs.item) {
-            this.item_width = this.$refs.item[0].clientWidth + 40;
+            this.$store.commit('carousel/itemWidth', this.$refs.item[0].clientWidth + 40);
         }
     },
 
     methods: {
         clickLeft: function clickLeft() {
-            var nextPosition = this.position + this.item_width;
-            if (nextPosition <= 0) {
-                this.photoIndex--;
-                this.updatePosition(nextPosition);
-            }
+            this.$store.commit('carousel/clickLeft');
         },
         clickRight: function clickRight() {
-            var nextPosition = this.position - this.item_width;
-            if (nextPosition > -this.slider_width) {
-                this.photoIndex++;
-                this.updatePosition(nextPosition);
-            }
+            this.$store.commit('carousel/clickRight');
         },
-        updatePosition: function updatePosition(position) {
-            var payload = {
-                index: this.photoIndex,
-                position: position
-            };
-            this.$store.commit('setPosition', payload);
+        upload: function upload() {
+            var _this = this;
+
+            if (this.uploadPhoto.value != '') {
+                this.$store.commit('map/spinner', true);
+
+                var data = new FormData();
+                data.append('id', this.markerId);
+                data.append('photo', this.uploadPhoto.value);
+
+                axios.post('/api/photo/upload', data).then(function (res) {
+                    if (res.data.success) {
+                        var payload = {
+                            id: res.data.id,
+                            path: res.data.url
+                        };
+                        _this.$store.commit('photo/addPhoto', payload);
+                        _this.$store.commit('photo/isUpload', false);
+                        _this.$store.commit('map/spinner', false);
+                    } else {
+                        _this.$store.commit('map/spinner', true);
+                    }
+                }).catch(function (err) {
+                    console.log(err);
+                });
+            }
         },
         cancel: function cancel() {
             if (this.photos.length != 0) {
@@ -27238,22 +27260,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     computed: {
         photos: function photos() {
-            return this.$store.state.photos;
+            return this.$store.state.photo.photo_list;
         },
         uploadPhoto: function uploadPhoto() {
-            return this.$store.state.uploadPhoto;
+            return this.$store.state.photo.uploadPhoto;
         },
         position: function position() {
-            return this.$store.state.position;
+            return this.$store.state.carousel.position;
         },
         isUpload: function isUpload() {
-            return this.$store.state.isUpload;
-        },
-        isReading: function isReading() {
-            return this.$store.state.isReading;
+            return this.$store.state.photo.isUpload;
         },
         markerId: function markerId() {
-            return this.$store.state.marker_id;
+            return this.$store.state.map.mark_id;
         }
     }
 });
@@ -27266,24 +27285,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return photo; });
 var photo = {
     methods: {
-        upload: function upload() {
-            var _this = this;
+        // upload : function(){
+        //     if(this.uploadPhoto.value != ''){
+        //         this.$store.commit('isReading',true);
+        //         this.sending = true;
 
-            if (this.uploadPhoto.value != '') {
-                this.sending = true;
+        //         let data = new FormData();
+        //         data.append('id', this.markerId);
+        //         data.append('photo', this.uploadPhoto.value);
 
-                var data = new FormData();
-                data.append('id', this.markerId);
-                data.append('photo', this.uploadPhoto.value);
-
-                axios.post('/api/photo/upload', data).then(function (res) {
-                    _this.sending = false;
-                    _this.$store.commit('isUpload', false);
-                }).catch(function (err) {
-                    console.log(err);
-                });
-            }
-        }
+        //         axios.post('/api/photo/upload',data).then((res)=>{
+        //             console.log(res);
+        //             this.$store.commit('isReading',false);
+        //         }).catch((err)=>{ console.log(err) })
+        //     }
+        // }
     }
 };
 
@@ -27336,7 +27352,7 @@ var render = function() {
             : _vm._e(),
           _vm._v(" "),
           _vm._l(_vm.photos, function(item) {
-            return !_vm.isReading
+            return _vm.photos.length > 0
               ? _c(
                   "div",
                   { ref: "item", refInFor: true, staticClass: "item" },
@@ -27409,11 +27425,11 @@ var render = function() {
         "div",
         { staticClass: "carousel-area" },
         [
-          _vm.isReading
+          _vm.spinner
             ? _c("i", { staticClass: "fa fa-spinner fa-spin" })
             : _vm._e(),
           _vm._v(" "),
-          !_vm.isReading ? _c("Carousel") : _vm._e()
+          !_vm.spinner ? _c("Carousel") : _vm._e()
         ],
         1
       )
@@ -27442,7 +27458,7 @@ var render = function() {
     "div",
     { staticClass: "window" },
     [
-      _vm.isShow ? _c("Backdrop") : _vm._e(),
+      _vm.backdrop ? _c("Backdrop") : _vm._e(),
       _vm._v(" "),
       _c("div", { staticClass: "google-map", attrs: { id: "map" } })
     ],
@@ -27465,7 +27481,7 @@ if (false) {
 
 
 window._ = __webpack_require__(41);
-window.Popper = __webpack_require__(8).default;
+window.Popper = __webpack_require__(9).default;
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -27474,7 +27490,7 @@ window.Popper = __webpack_require__(8).default;
  */
 
 try {
-  window.$ = window.jQuery = __webpack_require__(9);
+  window.$ = window.jQuery = __webpack_require__(10);
 
   __webpack_require__(43);
 } catch (e) {}
@@ -44673,7 +44689,7 @@ module.exports = function(module) {
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
   */
 (function (global, factory) {
-   true ? factory(exports, __webpack_require__(9), __webpack_require__(8)) :
+   true ? factory(exports, __webpack_require__(10), __webpack_require__(9)) :
   typeof define === 'function' && define.amd ? define(['exports', 'jquery', 'popper.js'], factory) :
   (factory((global.bootstrap = {}),global.jQuery,global.Popper));
 }(this, (function (exports,$,Popper) { 'use strict';
@@ -48627,9 +48643,9 @@ module.exports = __webpack_require__(45);
 
 
 var utils = __webpack_require__(0);
-var bind = __webpack_require__(10);
+var bind = __webpack_require__(11);
 var Axios = __webpack_require__(47);
-var defaults = __webpack_require__(6);
+var defaults = __webpack_require__(7);
 
 /**
  * Create an instance of Axios
@@ -48662,9 +48678,9 @@ axios.create = function create(instanceConfig) {
 };
 
 // Expose Cancel & CancelToken
-axios.Cancel = __webpack_require__(14);
+axios.Cancel = __webpack_require__(15);
 axios.CancelToken = __webpack_require__(61);
-axios.isCancel = __webpack_require__(13);
+axios.isCancel = __webpack_require__(14);
 
 // Expose all/spread
 axios.all = function all(promises) {
@@ -48712,7 +48728,7 @@ function isSlowBuffer (obj) {
 "use strict";
 
 
-var defaults = __webpack_require__(6);
+var defaults = __webpack_require__(7);
 var utils = __webpack_require__(0);
 var InterceptorManager = __webpack_require__(56);
 var dispatchRequest = __webpack_require__(57);
@@ -48817,7 +48833,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 "use strict";
 
 
-var createError = __webpack_require__(12);
+var createError = __webpack_require__(13);
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -49250,8 +49266,8 @@ module.exports = InterceptorManager;
 
 var utils = __webpack_require__(0);
 var transformData = __webpack_require__(58);
-var isCancel = __webpack_require__(13);
-var defaults = __webpack_require__(6);
+var isCancel = __webpack_require__(14);
+var defaults = __webpack_require__(7);
 var isAbsoluteURL = __webpack_require__(59);
 var combineURLs = __webpack_require__(60);
 
@@ -49410,7 +49426,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 "use strict";
 
 
-var Cancel = __webpack_require__(14);
+var Cancel = __webpack_require__(15);
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -49506,6 +49522,91 @@ module.exports = function spread(callback) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 64 */,
+/* 65 */,
+/* 66 */,
+/* 67 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var state = {
+    backdrop: false,
+    spinner: false,
+    mark_id: 0
+};
+
+var getters = {};
+
+var mutations = {
+    backdrop: function backdrop(state, status) {
+        state.backdrop = status;
+    },
+    spinner: function spinner(state, status) {
+        state.spinner = status;
+    },
+    setMarkerId: function setMarkerId(state, id) {
+        state.mark_id = id;
+    }
+};
+
+var actions = {
+    clickMarker: function clickMarker(_ref, id) {
+        var commit = _ref.commit;
+
+        commit('backdrop', true);
+        commit('spinner', true);
+        commit('setMarkerId', id);
+    }
+};
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    namespaced: true,
+    state: state,
+    getters: getters,
+    mutations: mutations,
+    actions: actions
+});
+
+/***/ }),
+/* 68 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var state = {
+    photo_list: [],
+    isUpload: false,
+    uploadPhoto: { src: "", value: "" }
+};
+
+var getters = {};
+
+var mutations = {
+    isUpload: function isUpload(state, status) {
+        state.isUpload = status;
+    },
+    setPhotoList: function setPhotoList(state, data) {
+        state.photo_list = data;
+    },
+    uploadPhoto: function uploadPhoto(state, payload) {
+        state.uploadPhoto.src = payload.src;
+        state.uploadPhoto.value = payload.value;
+    },
+    addPhoto: function addPhoto(state, payload) {
+        state.photo_list.splice(0, 0, payload);
+    }
+};
+
+var actions = {};
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    namespaced: true,
+    state: state,
+    getters: getters,
+    mutations: mutations,
+    actions: actions
+});
 
 /***/ })
 /******/ ]);

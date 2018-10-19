@@ -9,9 +9,9 @@
         </div>
         <div class = "carousel-area">
             <!-- Loading spinner -->
-            <i class="fa fa-spinner fa-spin" v-if = "isReading"></i>
+            <i class="fa fa-spinner fa-spin" v-if = "spinner"></i>
             
-            <Carousel v-if = "!isReading"/>
+            <Carousel v-if = "!spinner"/>
         </div>
     </div>
 </template>
@@ -31,10 +31,10 @@
         },
         methods : {
             uploadClick : function(){
-                this.$store.commit('isUpload',true);
+                this.$store.commit('photo/isUpload',true);
             },
             deletePhoto : function(){
-                this.$store.commit('isReading',true);
+                // this.$store.commit('isReading',true);
 
                 let data = {
                     location_id : this.markerId,
@@ -44,7 +44,7 @@
                     if(res.data.success){
                         this.$store.commit('deletePhoto',this.photoIndex);
                         setTimeout(()=>{
-                            this.$store.commit('isReading',false)
+                            // this.$store.commit('isReading',false)
                         },1000);
                     }
                 }).catch((err)=>{ console.log(err) })
@@ -57,31 +57,36 @@
                 reader.onload = () => {
                     payload.src = reader.result;
                     payload.value = event.target.files[0];
-                    this.$store.commit('previewImage',payload);
+                    this.$store.commit('photo/uploadPhoto',payload);
                 }
             },
             closeBackdrop : function(event){
                 if(event.target.id == "backdrop"){
-                    this.$store.commit('backdropClose');
+                    this.$store.commit('map/backdrop',false);
+                    this.$store.commit('photo/setPhotoList',[]);
+                    this.$store.dispatch('carousel/backdropClose');
+
+                    let payload = {
+                        src : "",
+                        value : ""
+                    }
+                    this.$store.commit('photo/uploadPhoto',payload);
                 }
             }
         },
         computed : {
-            isUpload : function(){
-                return this.$store.state.isUpload;
+            spinner : function(){
+                return this.$store.state.map.spinner;
             },
-            isReading : function(){
-                return this.$store.state.isReading;
+            photoList : function(){
+                return this.$store.state.photo.photo_list;
             },
-            photos : function(){
-                return this.$store.state.photos;
-            },
-            photoIndex : function(){
-                return this.$store.state.photo_index;
-            },
-            markerId : function(){
-                return this.$store.state.marker_id;
-            }
+            // photoIndex : function(){
+            //     return this.$store.state.photo_index;
+            // },
+            // markerId : function(){
+            //     return this.$store.state.marker_id;
+            // }
         }
     }
 </script>

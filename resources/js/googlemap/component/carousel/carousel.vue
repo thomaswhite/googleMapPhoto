@@ -27,7 +27,7 @@
 
                 <!-- photo from db -->
                 <div class = "item" ref = "item"
-                     v-if = "!isReading"
+                     v-if = "photos.length > 0"
                      v-for = "item in photos" >
                     <div class = "photo">
                         <img v-bind:src="item.path">
@@ -47,8 +47,6 @@
         mixins : [photo],
         data () {
             return {
-                slider_width :0,
-                item_width:0,
                 sending : false,
                 photoIndex : 0,
             }
@@ -57,32 +55,41 @@
             this.photoIndex = this.$store.state.photo_index;
         },
         mounted(){
-            this.slider_width = this.$refs.slider.clientWidth;
+            this.$store.commit('carousel/sliderWidth',this.$refs.slider.clientWidth);
             if(this.$refs.item){
-                this.item_width = this.$refs.item[0].clientWidth + 40;
+                this.$store.commit('carousel/itemWidth',this.$refs.item[0].clientWidth + 40);
             }
         },
         methods: {
             clickLeft : function(){
-                let nextPosition = this.position + this.item_width;
-                if(nextPosition <= 0){
-                    this.photoIndex--;
-                    this.updatePosition(nextPosition);
-                }
+                this.$store.commit('carousel/clickLeft');
             },
             clickRight : function(){
-                let nextPosition = this.position - this.item_width
-                if(nextPosition > -(this.slider_width)){
-                    this.photoIndex++;
-                    this.updatePosition(nextPosition);
-                }
+                this.$store.commit('carousel/clickRight');
             },
-            updatePosition : function(position){
-                let payload = {
-                    index : this.photoIndex,
-                    position : position
+            upload : function(){
+                if(this.uploadPhoto.value != ''){
+                    this.$store.commit('map/spinner',true);
+
+                    let data = new FormData();
+                    data.append('id', this.markerId);
+                    data.append('photo', this.uploadPhoto.value);
+
+                    axios.post('/api/photo/upload',data).then((res)=>{
+                        if(res.data.success){
+                            let payload = {
+                                id : res.data.id,
+                                path : res.data.url
+                            }
+                            this.$store.commit('photo/addPhoto',payload);
+                            this.$store.commit('photo/isUpload',false);
+                            this.$store.commit('map/spinner',false);
+                        }else{
+                            this.$store.commit('map/spinner',true);
+                        }
+                        
+                    }).catch((err)=>{ console.log(err) })
                 }
-                this.$store.commit('setPosition',payload);
             },
             cancel : function(){
                 if(this.photos.length != 0){
@@ -94,22 +101,19 @@
         },
         computed : {
             photos : function(){
-                return this.$store.state.photos;
+                return this.$store.state.photo.photo_list;
             },
             uploadPhoto : function(){
-                return this.$store.state.uploadPhoto;
+                return this.$store.state.photo.uploadPhoto;
             },
             position : function(){
-                return this.$store.state.position;
+                return this.$store.state.carousel.position;
             },
             isUpload : function(){
-                return this.$store.state.isUpload;
-            },
-            isReading : function(){
-                return this.$store.state.isReading;
+                return this.$store.state.photo.isUpload;
             },
             markerId : function(){
-                return this.$store.state.marker_id;
+                return this.$store.state.map.mark_id;
             }
         }
     }
