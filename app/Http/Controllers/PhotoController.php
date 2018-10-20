@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Model\Location;
 use App\Model\Photo;
 use Storage;
+use Image;
 
 class PhotoController extends Controller
 {
@@ -45,20 +46,28 @@ class PhotoController extends Controller
         }
 
         if($request->hasFile('photo')){
-            // upload image to s3
-            $photo = $request->file('photo');
-            $photo_name = Storage::disk('s3')->put('photo',$photo);
-            $photo_url = Storage::disk('s3')->url($photo_name);
+            $s3 = Storage::disk('s3');
 
-            // insert data in db
-            $photo_id = Photo::create(['path' => $photo_url]);
-            $mark->photos()->save($photo_id);
+            // compress photo
+            $photo_file_name = $request->file('photo')->getFilename();
+            $photo = Image::make($request->file('photo'));
+            $photo->resize(500, null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            $photo->encode('jpeg',99);
 
-            $data['success'] = true;
-            $data['url'] = $photo_url;
-            $data['id'] = $photo_id->id;
+            // put photo to s3 and return data
+            if($s3->put('photo/'.$photo_file_name.'.jpeg',(string)$photo)){
+                $photo_url = $s3->url('photo/'.$photo_file_name.'.jpeg');
+                $photo_id = Photo::create(['path' => $photo_url]);
+                $mark->photos()->save($photo_id);
 
-            return response()->json($data);
+                $data['success'] = true;
+                $data['url'] = $photo_url;
+                $data['id'] = $photo_id->id;
+
+                return response()->json($data);
+            }
         }
 
         return $this->responseData(false,'no file');
