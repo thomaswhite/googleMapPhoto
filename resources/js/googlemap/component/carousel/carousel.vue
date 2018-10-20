@@ -92,11 +92,7 @@
                 }
             },
             cancel : function(){
-                if(this.photos.length != 0){
-                    this.$store.commit('cancelUpload');
-                }else{
-                    this.$store.commit('backdropClose');
-                } 
+                this.$store.commit('photo/isUpload',false);
             }
         },
         computed : {

@@ -11407,6 +11407,9 @@ var mutations = {
                 state.position = nextPosition;
             }
         }
+    },
+    deletePosition: function deletePosition(state) {
+        state.position = state.position + state.item_width;
     }
 };
 var actions = {
@@ -26986,27 +26989,36 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {};
     },
-    mounted: function mounted() {},
 
     methods: {
         uploadClick: function uploadClick() {
+            var payload = {
+                src: "",
+                value: ""
+            };
+            this.$store.commit('photo/uploadPhoto', payload);
             this.$store.commit('photo/isUpload', true);
+            this.$store.commit('carousel/position', 0);
+            this.$store.commit('carousel/photo_index', 0);
         },
         deletePhoto: function deletePhoto() {
             var _this = this;
 
-            // this.$store.commit('isReading',true);
-
+            this.$store.commit('map/spinner', true);
             var data = {
                 location_id: this.markerId,
-                photo_id: this.photos[this.photoIndex].id
+                photo_id: this.photoList[this.photoIndex].id
             };
             axios.post('/api/photo/delete', data).then(function (res) {
                 if (res.data.success) {
-                    _this.$store.commit('deletePhoto', _this.photoIndex);
-                    setTimeout(function () {
-                        // this.$store.commit('isReading',false)
-                    }, 1000);
+                    _this.$store.commit('photo/deletePhoto', _this.photoIndex);
+                    if (_this.photoList.length == 0) {
+                        _this.$store.commit('photo/isUpload', true);
+                    }
+                    if (_this.photoIndex == _this.photoList.length) {
+                        _this.$store.commit('carousel/deletePosition');
+                    }
+                    _this.$store.commit('map/spinner', false);
                 }
             }).catch(function (err) {
                 console.log(err);
@@ -27045,13 +27057,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         photoList: function photoList() {
             return this.$store.state.photo.photo_list;
+        },
+        photoIndex: function photoIndex() {
+            return this.$store.state.carousel.photo_index;
+        },
+        markerId: function markerId() {
+            return this.$store.state.map.mark_id;
         }
-        // photoIndex : function(){
-        //     return this.$store.state.photo_index;
-        // },
-        // markerId : function(){
-        //     return this.$store.state.marker_id;
-        // }
     }
 });
 
@@ -27251,11 +27263,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         },
         cancel: function cancel() {
-            if (this.photos.length != 0) {
-                this.$store.commit('cancelUpload');
-            } else {
-                this.$store.commit('backdropClose');
-            }
+            this.$store.commit('photo/isUpload', false);
         }
     },
     computed: {
@@ -49584,6 +49592,8 @@ var getters = {};
 
 var mutations = {
     isUpload: function isUpload(state, status) {
+        state.uploadPhoto.src = "";
+        state.uploadPhoto.value = "";
         state.isUpload = status;
     },
     setPhotoList: function setPhotoList(state, data) {
@@ -49595,6 +49605,9 @@ var mutations = {
     },
     addPhoto: function addPhoto(state, payload) {
         state.photo_list.splice(0, 0, payload);
+    },
+    deletePhoto: function deletePhoto(state, index) {
+        state.photo_list.splice(index, 1);
     }
 };
 

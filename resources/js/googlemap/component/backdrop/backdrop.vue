@@ -27,25 +27,33 @@
             return {
             }
         },
-        mounted(){
-        },
         methods : {
             uploadClick : function(){
+                let payload = {
+                        src : "",
+                        value : ""
+                    }
+                this.$store.commit('photo/uploadPhoto',payload);
                 this.$store.commit('photo/isUpload',true);
+                this.$store.commit('carousel/position',0);
+                this.$store.commit('carousel/photo_index',0);
             },
             deletePhoto : function(){
-                // this.$store.commit('isReading',true);
-
+                this.$store.commit('map/spinner',true);
                 let data = {
                     location_id : this.markerId,
-                    photo_id : this.photos[this.photoIndex].id
+                    photo_id : this.photoList[this.photoIndex].id
                 }
                 axios.post('/api/photo/delete',data).then((res)=>{
                     if(res.data.success){
-                        this.$store.commit('deletePhoto',this.photoIndex);
-                        setTimeout(()=>{
-                            // this.$store.commit('isReading',false)
-                        },1000);
+                        this.$store.commit('photo/deletePhoto',this.photoIndex);
+                        if(this.photoList.length == 0){
+                            this.$store.commit('photo/isUpload',true);
+                        }
+                        if(this.photoIndex == this.photoList.length){
+                            this.$store.commit('carousel/deletePosition');
+                        }
+                        this.$store.commit('map/spinner',false);
                     }
                 }).catch((err)=>{ console.log(err) })
             },
@@ -81,12 +89,12 @@
             photoList : function(){
                 return this.$store.state.photo.photo_list;
             },
-            // photoIndex : function(){
-            //     return this.$store.state.photo_index;
-            // },
-            // markerId : function(){
-            //     return this.$store.state.marker_id;
-            // }
+            photoIndex : function(){
+                return this.$store.state.carousel.photo_index;
+            },
+            markerId : function(){
+                return this.$store.state.map.mark_id;
+            }
         }
     }
 </script>

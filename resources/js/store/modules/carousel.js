@@ -34,6 +34,9 @@ const mutations = {
                 state.position = nextPosition;
             }
         }
+    },
+    deletePosition(state){
+        state.position = state.position + state.item_width;
     }
 }
 const actions = {

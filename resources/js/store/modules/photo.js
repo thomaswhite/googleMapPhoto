@@ -8,6 +8,8 @@ const getters = {}
 
 const mutations = {
     isUpload(state,status){
+        state.uploadPhoto.src = "";
+        state.uploadPhoto.value = "";
         state.isUpload = status;
     },
     setPhotoList(state,data){
@@ -19,6 +21,9 @@ const mutations = {
     },
     addPhoto(state,payload){
         state.photo_list.splice(0,0,payload);
+    },
+    deletePhoto(state,index){
+        state.photo_list.splice(index,1);
     }
 }
 
