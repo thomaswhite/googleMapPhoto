@@ -2,13 +2,12 @@
     width:100%;
     height:100%;
     display: inline-flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 }
 .carousel-block{
-    width:310px;
+    width:350px;
     height:480px;
-    margin: 0 1rem;
     overflow: hidden;
 }
 .carousel-slider{
@@ -19,10 +18,10 @@
     transition: transform 1s ease;
 }
 .item{
-    width:270px;
-    height:430px;
-    margin:0 20px;
-    padding-top:30px;
+    width:310px;
+    height:360px;
+    margin : 0 20px;
+    padding-top:20px;
     display: inline-flex;
     flex-direction: column;
     align-items: center;
@@ -30,14 +29,15 @@
     background-color: #ffffff;
 }
 .photo{
-    width:230px;
-    height:310px;
+    width:290px;
+    height:290px;
     display: flex;
     align-items: center;
-    background-color: rgb(182, 178, 178);
+    justify-content: center;
     border-radius: 2px;
     img{
-        max-width: 230px;
+        max-width: 290px;
+        max-height: 290px;
     }
 }
 
@@ -54,13 +54,13 @@
 }
 .yes,
 .no{
-    width:50px;
-    height:50px;
+    width:30px;
+    height:30px;
     margin:0 1rem;
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    font-size: 32px;
+    font-size: 24px;
     border-radius: 50%;
     color:rgb(253, 253, 253);
     cursor: pointer;

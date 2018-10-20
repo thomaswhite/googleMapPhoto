@@ -12,11 +12,8 @@
                         <img v-bind:src="uploadPhoto.src">
                     </div>
                     <div class = "select">
-                        <div class = "yes" v-if = "!sending" v-on:click = "upload">
+                        <div class = "yes" v-on:click = "upload">
                             <i class="fas fa-check"></i>
-                        </div>
-                        <div class = "yes" v-if = "sending">
-                            <i class="fa fa-spinner fa-spin"></i>
                         </div>
 
                         <div class = "no" v-on:click = "cancel">
@@ -42,9 +39,7 @@
 </template>
 
 <script>
-    import {photo} from '../../mixin/photo';
     export default {
-        mixins : [photo],
         data () {
             return {
                 sending : false,

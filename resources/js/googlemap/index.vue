@@ -8,11 +8,9 @@
 
 <script>
     import {map} from './mixin/map.js';
-    // import {marker} from './mixin/marker.js';
     import backdrop from './component/backdrop/backdrop.vue';
 
     export default {
-        // mixins : [map,marker],
         mixins : [map],
         components:{
             'Backdrop':backdrop

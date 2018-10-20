@@ -26734,11 +26734,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 
-// import {marker} from './mixin/marker.js';
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    // mixins : [map,marker],
     mixins: [__WEBPACK_IMPORTED_MODULE_0__mixin_map_js__["a" /* map */]],
     components: {
         'Backdrop': __WEBPACK_IMPORTED_MODULE_1__component_backdrop_backdrop_vue___default.a
@@ -26948,7 +26946,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n.backdrop[data-v-421241c3] {\n  width: 100%;\n  height: 100%;\n  position: fixed;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  background-color: rgba(175, 174, 174, 0.3);\n  z-index: 100;\n}\n.carousel-area[data-v-421241c3] {\n  width: 385px;\n  height: 70%;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.control-area[data-v-421241c3] {\n  width: 100%;\n  height: 10%;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: end;\n      -ms-flex-align: end;\n          align-items: flex-end;\n}\n.control[data-v-421241c3] {\n  margin: 0 1rem;\n  padding: 0.4rem 1rem;\n  border-radius: 5px;\n  background-color: #7b97e4;\n  cursor: pointer;\n}\n.control[data-v-421241c3]:hover {\n  color: #fffefe;\n}\ninput[data-v-421241c3] {\n  display: none;\n}\n", ""]);
+exports.push([module.i, "\n.backdrop[data-v-421241c3] {\n  width: 100%;\n  height: 100%;\n  position: fixed;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  background-color: rgba(175, 174, 174, 0.3);\n  z-index: 100;\n}\n.carousel-area[data-v-421241c3] {\n  width: 500px;\n  height: 70%;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.control-area[data-v-421241c3] {\n  width: 100%;\n  height: 10%;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: end;\n      -ms-flex-align: end;\n          align-items: flex-end;\n}\n.control[data-v-421241c3] {\n  margin: 0 1rem;\n  padding: 0.4rem 1rem;\n  border-radius: 5px;\n  background-color: #7b97e4;\n  cursor: pointer;\n}\n.control[data-v-421241c3]:hover {\n  color: #fffefe;\n}\ninput[data-v-421241c3] {\n  display: none;\n}\n", ""]);
 
 // exports
 
@@ -27153,7 +27151,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n.carousel[data-v-53612d03] {\n  width: 100%;\n  height: 100%;\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.carousel-block[data-v-53612d03] {\n  width: 310px;\n  height: 480px;\n  margin: 0 1rem;\n  overflow: hidden;\n}\n.carousel-slider[data-v-53612d03] {\n  height: 100%;\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  overflow: hidden;\n  -webkit-transition: -webkit-transform 1s ease;\n  transition: -webkit-transform 1s ease;\n  transition: transform 1s ease;\n  transition: transform 1s ease, -webkit-transform 1s ease;\n}\n.item[data-v-53612d03] {\n  width: 270px;\n  height: 430px;\n  margin: 0 20px;\n  padding-top: 30px;\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  border-radius: 5px;\n  background-color: #ffffff;\n}\n.photo[data-v-53612d03] {\n  width: 230px;\n  height: 310px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  background-color: #b6b2b2;\n  border-radius: 2px;\n}\n.photo img[data-v-53612d03] {\n    max-width: 230px;\n}\n.discription[data-v-53612d03] {\n  max-width: 230px;\n  margin-top: 20px;\n}\n.select[data-v-53612d03] {\n  width: 230px;\n  margin-top: 20px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.yes[data-v-53612d03],\n.no[data-v-53612d03] {\n  width: 50px;\n  height: 50px;\n  margin: 0 1rem;\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  font-size: 32px;\n  border-radius: 50%;\n  color: #fdfdfd;\n  cursor: pointer;\n}\n.yes[data-v-53612d03]:hover,\n  .no[data-v-53612d03]:hover {\n    opacity: 0.8;\n}\n.yes[data-v-53612d03] {\n  background-color: #56c456;\n}\n.no[data-v-53612d03] {\n  background-color: #e75b5b;\n}\n.fa-spinner[data-v-53612d03] {\n  font-size: 32px;\n}\n.fa-angle-left[data-v-53612d03],\n.fa-angle-right[data-v-53612d03] {\n  font-size: 32px;\n}\n.fa-angle-left[data-v-53612d03]:hover,\n.fa-angle-right[data-v-53612d03]:hover {\n  opacity: 0.2;\n}\n", ""]);
+exports.push([module.i, "\n.carousel[data-v-53612d03] {\n  width: 100%;\n  height: 100%;\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.carousel-block[data-v-53612d03] {\n  width: 350px;\n  height: 480px;\n  overflow: hidden;\n}\n.carousel-slider[data-v-53612d03] {\n  height: 100%;\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  overflow: hidden;\n  -webkit-transition: -webkit-transform 1s ease;\n  transition: -webkit-transform 1s ease;\n  transition: transform 1s ease;\n  transition: transform 1s ease, -webkit-transform 1s ease;\n}\n.item[data-v-53612d03] {\n  width: 310px;\n  height: 360px;\n  margin: 0 20px;\n  padding-top: 20px;\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  border-radius: 5px;\n  background-color: #ffffff;\n}\n.photo[data-v-53612d03] {\n  width: 290px;\n  height: 290px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  border-radius: 2px;\n}\n.photo img[data-v-53612d03] {\n    max-width: 290px;\n    max-height: 290px;\n}\n.discription[data-v-53612d03] {\n  max-width: 230px;\n  margin-top: 20px;\n}\n.select[data-v-53612d03] {\n  width: 230px;\n  margin-top: 20px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n.yes[data-v-53612d03],\n.no[data-v-53612d03] {\n  width: 30px;\n  height: 30px;\n  margin: 0 1rem;\n  display: -webkit-inline-box;\n  display: -ms-inline-flexbox;\n  display: inline-flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  font-size: 24px;\n  border-radius: 50%;\n  color: #fdfdfd;\n  cursor: pointer;\n}\n.yes[data-v-53612d03]:hover,\n  .no[data-v-53612d03]:hover {\n    opacity: 0.8;\n}\n.yes[data-v-53612d03] {\n  background-color: #56c456;\n}\n.no[data-v-53612d03] {\n  background-color: #e75b5b;\n}\n.fa-spinner[data-v-53612d03] {\n  font-size: 32px;\n}\n.fa-angle-left[data-v-53612d03],\n.fa-angle-right[data-v-53612d03] {\n  font-size: 32px;\n}\n.fa-angle-left[data-v-53612d03]:hover,\n.fa-angle-right[data-v-53612d03]:hover {\n  opacity: 0.2;\n}\n", ""]);
 
 // exports
 
@@ -27164,7 +27162,6 @@ exports.push([module.i, "\n.carousel[data-v-53612d03] {\n  width: 100%;\n  heigh
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixin_photo__ = __webpack_require__(36);
 //
 //
 //
@@ -27205,13 +27202,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    mixins: [__WEBPACK_IMPORTED_MODULE_0__mixin_photo__["a" /* photo */]],
     data: function data() {
         return {
             sending: false,
@@ -27286,32 +27278,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 36 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return photo; });
-var photo = {
-    methods: {
-        // upload : function(){
-        //     if(this.uploadPhoto.value != ''){
-        //         this.$store.commit('isReading',true);
-        //         this.sending = true;
-
-        //         let data = new FormData();
-        //         data.append('id', this.markerId);
-        //         data.append('photo', this.uploadPhoto.value);
-
-        //         axios.post('/api/photo/upload',data).then((res)=>{
-        //             console.log(res);
-        //             this.$store.commit('isReading',false);
-        //         }).catch((err)=>{ console.log(err) })
-        //     }
-        // }
-    }
-};
-
-/***/ }),
+/* 36 */,
 /* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -27338,19 +27305,9 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "select" }, [
-                  !_vm.sending
-                    ? _c(
-                        "div",
-                        { staticClass: "yes", on: { click: _vm.upload } },
-                        [_c("i", { staticClass: "fas fa-check" })]
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.sending
-                    ? _c("div", { staticClass: "yes" }, [
-                        _c("i", { staticClass: "fa fa-spinner fa-spin" })
-                      ])
-                    : _vm._e(),
+                  _c("div", { staticClass: "yes", on: { click: _vm.upload } }, [
+                    _c("i", { staticClass: "fas fa-check" })
+                  ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "no", on: { click: _vm.cancel } }, [
                     _c("i", { staticClass: "fas fa-times" })
