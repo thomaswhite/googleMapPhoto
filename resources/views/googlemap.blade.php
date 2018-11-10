@@ -30,7 +30,7 @@
     // this function is google map api default require function, juset leave it empty
     function initMap() {}
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD198yGEhOe7wh1NpIMc_Mdhy1bZMo9sv0&callback=initMap" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_MAP_KEY')}}&callback=initMap" async defer></script>
 <script src="{{ asset('js/app.js') }}"></script>
 
 

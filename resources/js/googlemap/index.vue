@@ -93,16 +93,13 @@ export default {
       let data = {
         id: marker.id
       };
-      axios
-        .post("/api/mark/delete", data)
-        .then(res => {
-          if (res.data.success) {
-            marker.setMap();
-          }
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      axios.post("/api/mark/delete", data).then(res => {
+        if (res.data.success) {
+          marker.setMap();
+        }
+      }).catch(err => {
+        console.log(err);
+      });
     }
   },
   computed: {
