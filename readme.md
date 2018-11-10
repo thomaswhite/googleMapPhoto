@@ -1,6 +1,8 @@
-<h1>Google Map Photo</h1>
-This project is a 
-<br/>
+Google Map Photo
+===========================
+
+
+
 ## Before The Project
 
 - [Get a google map javascript api key](https://cloud.google.com/maps-platform).
@@ -27,12 +29,9 @@ GOOGLE_MAP_KEY=YOUR_GOOGLE_MAP_API_KEY
 
 ## Run command
 
-1. DB migrate
-``` php artisan migrate ```
+1. DB migrate : ``` php artisan migrate ```
 
-2. Install npm package
-``` npm install ```
+2. Install npm package : ``` npm install ```
 
-3. Run laravel mix
-``` npm run production ```
+3. Run laravel mix : ``` npm run production ```
 
