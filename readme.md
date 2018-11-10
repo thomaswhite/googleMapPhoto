@@ -1,38 +1,38 @@
 <h1>Google Map Photo</h1>
 This project is a 
 <br/>
-<h1>Before The Project</h1>
-<div>1. Must have a google map javascript api key</div>
-<div>https://cloud.google.com/maps-platform/?hl=zh-TW</div>
-<h3>.env setting</h3>
+## Before The Project
 
-```
-AWS_ACCESS_KEY_ID=
-AWS_SECRET_ACCESS_KEY=
-AWS_DEFAULT_REGION=
-AWS_BUCKET=
+- [Get a google map javascript api key](https://cloud.google.com/maps-platform).
+- [Get a aws user key](https://console.aws.amazon.com/iam/home#/home).
+- [Create a aws s3 bucket](https://s3.console.aws.amazon.com/s3/home).
+- Don't forget git the user key permission for s3
 
-GOOGLE_MAP_KEY=
+## .env setting
 ```
-<div style = "bakcground-color:lightgray">
-    <p style = "color:green">/* GOOGLE MAP Setting */</p>
-    <p>GOOGLE_MAP_KEY=</p>
-    <p style = "color:green">/* AWS Setting */</p>
-    <p>AWS_ACCESS_KEY_ID=</p>
-    <p>AWS_SECRET_ACCESS_KEY=</p>
-    <p>AWS_DEFAULT_REGION=</p>
-    <p>AWS_BUCKET=</p>
-    <p class = "comment">/* DB Setting */</p>
-    <p>DB_CONNECTION=mysql</p>
-    <p>DB_HOST=127.0.0.1</p>
-    <p>DB_PORT=3306</p>
-    <p>DB_DATABASE=homestead</p>
-    <p>DB_USERNAME=homestead</p>
-    <p>DB_PASSWORD=secret</p>
-</div>
-<br/>
-<style>
-    .comment{
-        color:green;
-    }
-</style>
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=YOUR_DB_NAME
+DB_USERNAME=YOUR_DB_USER_NAME
+DB_PASSWORD=YOUR_DB_PASSWORD
+
+AWS_ACCESS_KEY_ID=YOUR_AWS_USER_KEY_ID
+AWS_SECRET_ACCESS_KEY=YOUR_AWS_USER_KEY
+AWS_DEFAULT_REGION=YOUR_AWS_S3_REGION
+AWS_BUCKET=YOUR_AWS_S3_BUCKET_NAME
+
+GOOGLE_MAP_KEY=YOUR_GOOGLE_MAP_API_KEY
+```
+
+## Run command
+
+1. DB migrate
+``` php artisan migrate ```
+
+2. Install npm package
+``` npm install ```
+
+3. Run laravel mix
+``` npm run production ```
+
