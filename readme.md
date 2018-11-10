@@ -5,6 +5,15 @@ This project is a
 <div>1. Must have a google map javascript api key</div>
 <div>https://cloud.google.com/maps-platform/?hl=zh-TW</div>
 <h3>.env setting</h3>
+
+```
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
+AWS_DEFAULT_REGION=
+AWS_BUCKET=
+
+GOOGLE_MAP_KEY=
+```
 <div style = "bakcground-color:lightgray">
     <p style = "color:green">/* GOOGLE MAP Setting */</p>
     <p>GOOGLE_MAP_KEY=</p>
