@@ -26764,7 +26764,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.window[data-v-08e18d90] {\n  width: 100%;\n  height: 100%;\n}\n.google-map[data-v-08e18d90] {\n  width: 100%;\n  height: 90%;\n}\n", ""]);
+exports.push([module.i, "\n.window[data-v-08e18d90] {\n  width: 100%;\n  height: 100%;\n}\n.google-map[data-v-08e18d90] {\n  width: 100%;\n  height: 100%;\n}\n", ""]);
 
 // exports
 
