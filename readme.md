@@ -1,6 +1,6 @@
 Google Map Photo
 ===========================
-
+<a href="https://youtu.be/6GwlfX6fTrE"><img src="./public/img/thumbnails.png"></a>
 
 
 ## Before The Project
