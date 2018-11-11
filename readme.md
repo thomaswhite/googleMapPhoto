@@ -3,7 +3,7 @@ Google Map Photo
 <a href="https://youtu.be/6GwlfX6fTrE"><img src="./public/img/thumbnails.png"></a>
 [Demo vedio click here](https://youtu.be/6GwlfX6fTrE).
 
-##Operation
+## Operation
 Add Marker : double click
 Remove Marker : right click
 
