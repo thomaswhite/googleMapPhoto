@@ -1,9 +1,8 @@
 <template>
-    <div class = "window">
-        <Backdrop v-if = "backdrop"/>
-        <div class="google-map" id = "map"></div>
-    </div>
-    
+  <div class="window">
+    <Backdrop v-if="backdrop"/>
+    <div class="google-map" id="map"></div>
+  </div>
 </template>
 
 <script>
@@ -54,17 +53,14 @@ export default {
         lng: event.latLng.lng()
       };
 
-      axios
-        .post("/api/mark/add", mark)
-        .then(res => {
-          if (res.data.success) {
-            mark.id = res.data.id;
-          }
-          this.createMarker(mark);
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      axios.post("/api/mark/add", mark).then(res => {
+        if (res.data.success) {
+          mark.id = res.data.id;
+        }
+        this.createMarker(mark);
+      }).catch(err => {
+        console.log(err);
+      });
     },
     clickMarker: function (marker) {
       let data = {
@@ -72,22 +68,19 @@ export default {
       };
       this.$store.dispatch("map/clickMarker", marker.id);
 
-      axios
-        .post("/api/photo/list", data)
-        .then(res => {
-          if (res.data.success != false) {
-            this.$store.commit("photo/isUpload", false);
-            this.$store.commit("photo/setPhotoList", res.data);
-            this.$store.commit("map/spinner", false);
-          } else {
-            this.$store.commit("photo/setPhotoList", []);
-            this.$store.commit("photo/isUpload", true);
-            this.$store.commit("map/spinner", false);
-          }
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      axios.post("/api/photo/list", data).then(res => {
+        if (res.data.success != false) {
+          this.$store.commit("photo/isUpload", false);
+          this.$store.commit("photo/setPhotoList", res.data);
+          this.$store.commit("map/spinner", false);
+        } else {
+          this.$store.commit("photo/setPhotoList", []);
+          this.$store.commit("photo/isUpload", true);
+          this.$store.commit("map/spinner", false);
+        }
+      }).catch(err => {
+        console.log(err);
+      });
     },
     deleteMarker: function (marker) {
       let data = {
