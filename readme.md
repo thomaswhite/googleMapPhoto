@@ -12,7 +12,7 @@ Remove Marker : right click
 - [Get a google map javascript api key](https://cloud.google.com/maps-platform).
 - [Get a aws user key](https://console.aws.amazon.com/iam/home#/home).
 - [Create a aws s3 bucket](https://s3.console.aws.amazon.com/s3/home).
-- Don't forget git the user key permission for s3
+- Don't forget give the user key permission for s3
 
 ## .env setting
 ```
